@@ -1,39 +1,41 @@
-#include <string>
-#include <iostream>
-#include "windows.h"
 #include "Turma.h"
-#include "Aluno.h"
 
-void gotoxyF (int x, int y)
-{
-    COORD point;
-    point.X = x;
-    point.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
-}
+int Turma::contT=0;
 
 string mat;
 
 Turma::Turma()
 {
-    materia=""; ano=0 ; semestre=0; diaSemana=0; nrTurma=0; codDisciplina=0;
+    materia=""; ano=0 ; semestre=0; diaSemana=0; nrTurma=0; codDisciplina=0; contTA=0; professor="Vazio";
 }
+
 Turma::~Turma()
 {
 }
+
 void Turma::abrirTurma(int n)
 {
-    gotoxyF(7,11); cout << "informe o nome da Turma: ";
+    Tela::gotoxy(7,11); cout << "informe o nome da Turma: ";
     cin.ignore();
-    getline (cin,mat);
-    setMateria(mat);
-    gotoxyF(7,12); cout << "Ano: ";
-    cin >> ano;
-    gotoxyF(7,13);cout << "Semestre: ";
-    cin >> semestre;
-    gotoxyF(7,14);cout << "Dia da semana: ";
-    cin >> diaSemana;
-    gotoxyF(7,15);cout << "Numero da turma: "<< n+1<<endl<<endl;
+    getline (cin,materia);
+    do
+    {
+        Tela::gotoxy(7,12); cout << "Ano: ";
+        cin >> ano;
+    }
+    while(ano < 2016);
+    do
+    {
+        Tela::gotoxy(7,13);cout << "Semestre: ";
+        cin >> semestre;
+    }while(!(semestre == 1 || semestre == 2));
+    do
+    {
+        Tela::gotoxy(7,14);cout << "Dia da semana: 1)Segunda...7)Domingo: ";
+        cin >> diaSemana;
+    }
+    while(!(diaSemana > 0 && diaSemana < 8));
+    Tela::gotoxy(7,15);cout << "Numero da turma: "<< n+1<<endl<<endl;
     setNrTurma(n+1);
 }
 void Turma::alocarProfessor(string n)
@@ -57,10 +59,6 @@ string Turma::getMateria ()
 {
     return materia;
 }
-void Turma::setMateria (string n)
-{
-    materia = n;
-}
 
 int Turma::getNrTurma ()
 {
@@ -78,18 +76,28 @@ void Turma::setCodDisciplina (int n)
 void Turma::printDiarioClasse ()
 {
     int i;
-    gotoxyF(80,6); cout << "Turma: "<<getNrTurma();
-    gotoxyF(80,7); cout << "Materia: "<< materia;
-    gotoxyF(80,8); cout << "Professor: "<< professor;
+    Tela::gotoxy(80,6); cout << "Turma: "<<getNrTurma();
+    Tela::gotoxy(80,7); cout << "Materia: "<< materia;
+    Tela::gotoxy(80,8); cout << "Professor: "<< professor;
     if(contTA == 0)
     {
-        gotoxyF(80,9); cout << "Nenhum aluno inserido na turma.";
+        Tela::gotoxy(80,9); cout << "Nenhum aluno inserido na turma.";
     }
     else
     {
         cout << ":";
         for(i=0; i<contTA; i++){
-            gotoxyF(80,i+10); cout << "Aluno " << i+1 <<": "<< alunos[i];
+            Tela::gotoxy(80,i+10); cout << "Aluno " << i+1 <<": "<< alunos[i];
         }
     }
+}
+
+int Turma::getCont()
+{
+    return contT;
+}
+
+void Turma::addCont()
+{
+    contT++;
 }

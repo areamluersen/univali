@@ -1,13 +1,6 @@
-#include <iostream>
 #include "Tela.h"
-#include "time.h"
-#include <stdlib.h>
-#include <iomanip>
-#include "windows.h"
 
-using namespace std;
-
-void gotoxy (int x, int y)
+void Tela::gotoxy (int x, int y)
 {
     COORD point;
     point.X = x;
@@ -15,32 +8,41 @@ void gotoxy (int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
 }
 
-void Tela::inicio(){
+void Tela::inicio()
+{
     system("CLS"); // DESENHO DA TELA-MOLDURA
     gotoxy(6,6);
     cout<<"Escolha uma opcao: ";
     gotoxy(6,8);
-    cout<<"1) Incluir Aluno: ";
+    cout<<"1) Incluir Aluno";
     gotoxy(6,9);
-    cout<<"2) Incluir Professor: ";
+    cout<<"2) Incluir Professor";
     gotoxy(6,10);
-    cout<<"3) Incluir Turma: ";
+    cout<<"3) Incluir Turma";
     gotoxy(6,11);
-    cout<<"4) Incluir Disciplina: ";
+    cout<<"4) Incluir Disciplina";
     gotoxy(6,12);
-    cout<<"5) Incluir Curso: ";
+    cout<<"5) Incluir Curso";
     gotoxy(6,13);
-    cout<<"6) Matricular Aluno: ";
+    cout<<"6) Matricular Aluno";
     gotoxy(6,14);
-    cout<<"7) Alocar Professor: ";
+    cout<<"7) Alocar Professor";
     gotoxy(6,15);
-    cout<<"8) Incluir Avaliacao: ";
+    cout<<"8) Incluir Avaliacao";
     gotoxy(6,16);
-    cout<<"9) Impressoes - Historico - Situacao: ";
-
+    cout<<"9) Impressoes - Historico - Situacao";
+    gotoxy(6,17);
+    cout<<"10) Alocar Coordenador";
+    gotoxy(6,18);
+    cout<<"11) Mudar situacao de aluno";
+    gotoxy(6,19);
+    cout<<"12) Alterar dados";
+    gotoxy(6,20);
+    cout<<"13) Print aluno";
 }
 
-void Tela::moldura(){
+void Tela::moldura()
+{
     int coluna;
     //Cabecalho
     gotoxy(3,2);
@@ -132,7 +134,7 @@ void Tela::limpaTela()
         }
     }
 }
-void Tela::molduraPrint ()
+void Tela::molduraPrint()
 {
     gotoxy (91,2); cout << "- P R I N T -";
     int i=5,j;

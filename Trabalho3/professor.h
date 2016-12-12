@@ -2,18 +2,23 @@
 #define PROFESSOR_HPP_INCLUDED
 
 #include"pessoa.h"
+#include <iostream>
+#include "windows.h"
+#include "tela.h"
 
 class Professor : public Pessoa
 {
 private:
     string titulacaoMaxima;
-    int nt=0,turmas[6];
+    int nt,turmas[6];
+    static int contP;
 public:
     Professor ();
     virtual ~Professor ();
     void cadastrar();
-    string getNome();
     void setTurmaProfessor (int);
+    static int getCont();
+    static void addCont();
 };
 
 #endif // PROFESSOR_HPP_INCLUDEDR_H

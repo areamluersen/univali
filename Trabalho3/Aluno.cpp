@@ -1,69 +1,63 @@
 #include "Aluno.h"
-#include <string>
-#include <iostream>
-#include <stdio.h>
-#include "windows.h"
 
-using namespace std;
-
-string n,cep,tel;
 int pos=0;
-
-void gotoxyC (int x, int y)
-{
-    COORD point;
-    point.X = x;
-    point.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
-}
+int Aluno::contA=0;
 
 Aluno::Aluno()
 {
-    situacao =" ";
-    matricula = "";
-    turmas;
+    situacao ="Matriculado";
+    matricula ="";
+    nt=0;
 }
 Aluno::~Aluno()
 {
 }
 void Aluno::cadastrar()
 {
-    gotoxyC(4,4);
+    int cont=0;
+    Tela::gotoxy(4,4);
     cout << "I n c l u i r  -  A l u n o";
-    gotoxyC(7,7);cout << "Informe o nome do aluno : ";
+    Tela::gotoxy(7,7);cout << "Informe o nome do aluno : ";
     cin.ignore();
-    getline(cin,n);
-    gotoxyC(7,8);cout << "Informe a Matricula do Aluno : ";
+    getline(cin,nome);
+    Tela::gotoxy(7,8);cout << "Informe a Matricula do Aluno : ";
+    cin >> matricula;
+    Tela::gotoxy(7,9); cout << "Endereco : ";
     cin.ignore();
-    getline(cin,matricula);
-    setNome(n);
-    gotoxyC(7,9); cout << "Endereco : ";
-    cin.ignore();
-    getline(cin,cep);
-    setEndereco(cep);
-    gotoxyC(7,10);cout << "Telefone : ";
-    cin.ignore();
-    getline(cin,tel);
-    setTelefone(tel);
-    fflush(stdin);
-    gotoxyC(7,22); cout << "Aluno inserido com sucesso, voltando para tela inicial.";
+    getline(cin,endereco);
+    do
+    {
+        Tela::gotoxy(7,10);cout << "Telefone : ";
+        cin >> telefone;
+        for(string::size_type i=0; i<telefone.length(); ++i) cont++;
+    }
+    while(cont < 8);
 }
 void Aluno::setTurmaAluno (int n)
 {
-    if (pos<5){
-    turmas[pos]=n;
-    pos++;
-    nt++;
+    if (pos<5)
+    {
+        turmas[pos]=n;
+        pos++;
+        nt++;
     }
     else {cout << "Maximo de cursos atingidos";}
 }
+
 int  Aluno::getTurmaAluno(int n){
     return turmas[n];
 }
-string Aluno::getMatriculaAluno ()
+
+string Aluno::getMatriculaAluno()
 {
     return matricula;
 }
+
+string Aluno::getSituacaoAluno()
+{
+    return situacao;
+}
+
 void Aluno::matricularCurso()
 {
     situacao = "Matriculado";
@@ -79,7 +73,7 @@ void Aluno::formar()
 }
 void Aluno::evadir()
 {
-    situacao = "evadido";
+    situacao = "Evadido";
 }
 
 void Aluno::obterAvaliacoes()
@@ -91,3 +85,12 @@ void Aluno::emitirHistorico()
 
 }
 
+int Aluno::getCont()
+{
+    return contA;
+}
+
+void Aluno::addCont()
+{
+    contA++;
+}

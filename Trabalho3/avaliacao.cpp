@@ -1,16 +1,8 @@
 #include "avaliacao.h"
-#include "windows.h"
-#include <iostream>
 
 float nota,media;
 
-void gotoxyH (int x, int y)
-{
-    COORD point;
-    point.X = x;
-    point.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
-}
+int Avaliacao::contAV=0;
 
 Avaliacao::Avaliacao(string a, int t)
 {
@@ -18,7 +10,7 @@ Avaliacao::Avaliacao(string a, int t)
     setCodigoTurma(t);
     do
     {
-        gotoxyH(7,11);
+        Tela::gotoxy(7,11);
         cout << "Frequencia do aluno: ";
         cin >> frequencia;
 
@@ -26,7 +18,7 @@ Avaliacao::Avaliacao(string a, int t)
     while (frequencia < 0 || frequencia > 100);
     do
     {
-        gotoxyH(7,12);
+        Tela::gotoxy(7,12);
         cout << "Nota 1: ";
         cin >> nota;
     }
@@ -34,7 +26,7 @@ Avaliacao::Avaliacao(string a, int t)
     setNota1(nota);
     do
     {
-        gotoxyH(7,13);
+        Tela::gotoxy(7,13);
         cout << "Nota 2: ";
         cin >> nota;
     }
@@ -45,7 +37,7 @@ Avaliacao::Avaliacao(string a, int t)
     {
         do
         {
-            gotoxyH(7,14);
+            Tela::gotoxy(7,14);
             cout << "Prova Final: ";
             cin >> nota;
         }
@@ -56,19 +48,21 @@ Avaliacao::Avaliacao(string a, int t)
     if (media >= 5 && frequencia >= 75)
     {
         setAprovacao("Aprovado");
-        gotoxyH(7,15);
+        Tela::gotoxy(7,15);
         cout << "Aluno Aprovado.";
     }
     else
     {
         setAprovacao("Reprovado");
-        gotoxyH(7,15);
+        Tela::gotoxy(7,15);
         cout << "Aluno Reprovado.";
     }
 }
+
 Avaliacao::~Avaliacao()
 {
 }
+
 float Avaliacao::getNota1 ()
 {
     return nota1;
@@ -119,16 +113,26 @@ string Avaliacao::getNomeAluno ()
 }
 void Avaliacao::consultaAvaliacao ()
 {
-    gotoxyH(6,10);
+    Tela::gotoxy(6,10);
     cout << "Aluno : "<< aluno;
-    gotoxyH(6,11);
+    Tela::gotoxy(6,11);
     cout << "Nota 1: "<< getNota1();
-    gotoxyH(6,12);
+    Tela::gotoxy(6,12);
     cout << "Nota 2: "<< getNota2();
-    gotoxyH(6,13);
+    Tela::gotoxy(6,13);
     cout << "Nota Prova final-se tiver: "<< getProvaFinal();
-    gotoxyH(6,14);
+    Tela::gotoxy(6,14);
     cout << "media: "<<media;
-    gotoxyH(6,15);
+    Tela::gotoxy(6,15);
     cout << "Resultado: "<<aprovacao;
+}
+
+int Avaliacao::getCont()
+{
+    return contAV;
+}
+
+void Avaliacao::addCont()
+{
+    contAV++;
 }

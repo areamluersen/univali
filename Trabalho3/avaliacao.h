@@ -1,6 +1,11 @@
 #ifndef AVALIACAO_H
 #define AVALIACAO_H
+
 #include <string>
+#include "windows.h"
+#include <iostream>
+#include "tela.h"
+#include <conio.h>
 
 using namespace std;
 
@@ -9,6 +14,7 @@ class Avaliacao
     float nota1,nota2,notaProvaFinal;
     string aluno,aprovacao;
     int frequencia,turma;
+    static int contAV;
 public:
     Avaliacao(string,int);
     virtual ~Avaliacao();
@@ -25,7 +31,8 @@ public:
     string getNomeAluno ();
     void setCodigoTurma(int);
     void consultaAvaliacao ();
-
+    static int getCont();
+    static void addCont();
 };
 
 #endif // AVALIACAO_H
